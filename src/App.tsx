@@ -13,6 +13,8 @@ export default function App() {
       <h3>FromModule: {c.data.header.From.Module}</h3>
       <h3>Account: {c.data._xtra._From.Name}</h3>
       <h3>email: {c.data._xtra._From.Email}</h3>
+      <h3>balance: {c.data._xtra._From.Balances[0].CUCode}</h3>
+      <div>v-1</div>
     </div>
   );
 }
