@@ -1,3 +1,18 @@
+type accountModule = {
+  Module: "account";
+  Name: string;
+  Email: string;
+  Phone: string;
+  Bolge: string;
+  Balances: any[];
+};
+type walletModule = {
+  Module: "wallet";
+  Name: string;
+};
+
+type FromOrTo = accountModule | walletModule;
+
 const commandHeader = {
   printed: true,
   color: "#f0f",
@@ -17,6 +32,7 @@ const commandHeader = {
     c: "d"
   }
 };
+
 const commandLine1 = {
   id: 1,
   Comments: "elden alınan",
@@ -31,6 +47,7 @@ const commandLine1 = {
   },
   _xtra: {}
 };
+
 const commandLine2 = {
   id: 2,
   Comments: "",
@@ -45,11 +62,15 @@ const commandLine2 = {
   },
   _xtra: {}
 };
-const commandHeaderExtra = {
-  _To: {
+
+type commandHeaderExtraType = { From: FromOrTo; To: FromOrTo };
+const commandHeaderExtra: commandHeaderExtraType = {
+  To: {
+    Module: "wallet",
     Name: "Merkez"
   },
-  _From: {
+  From: {
+    Module: "account",
     Name: "Müşteri - 1",
     Email: "musteri@exampe.com",
     Phone: "12123123",
