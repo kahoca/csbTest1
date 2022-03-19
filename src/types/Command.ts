@@ -1,17 +1,4 @@
-type accountModule = {
-  Module: "account";
-  Name: string;
-  Email: string;
-  Phone: string;
-  Bolge: string;
-  Balances: any[];
-};
-type walletModule = {
-  Module: "wallet";
-  Name: string;
-};
-
-type FromOrTo = accountModule | walletModule;
+import { AnyModule, mockAccount, mockWorkshop } from "./Modules";
 
 const commandHeader = {
   printed: true,
@@ -63,31 +50,11 @@ const commandLine2 = {
   _xtra: {}
 };
 
-type commandHeaderExtraType = { From: FromOrTo; To: FromOrTo };
-const commandHeaderExtra: commandHeaderExtraType = {
-  To: {
-    Module: "wallet",
-    Name: "Merkez"
-  },
-  From: {
-    Module: "account",
-    Name: "Müşteri - 1",
-    Email: "musteri@exampe.com",
-    Phone: "12123123",
-    Bolge: "Merkez",
-    Balances: [
-      {
-        CUCode: "USD",
-        Amount: 1000,
-        Sign: "$"
-      },
-      {
-        CUCode: "HAS",
-        Amount: 45,
-        Sign: "Gr"
-      }
-    ]
-  }
+type ExtraType = { From: AnyModule; To: AnyModule };
+
+const mockExtra: ExtraType = {
+  From: mockAccount,
+  To: mockWorkshop
 };
 
 export const mockCommand = {
@@ -100,7 +67,7 @@ export const mockCommand = {
   flags: 1 | 2 | 4 | 8 | 16,
   data: {
     header: commandHeader,
-    _xtra: commandHeaderExtra,
+    _xtra: mockExtra,
     lines: [commandLine1, commandLine2]
   }
 };

@@ -1,11 +1,42 @@
 import "./styles.css";
 import { mockCommand } from "./types/Command";
+import { AnyModule, Modules } from "./types/Modules";
+
+type PropsType = {
+  i: AnyModule;
+};
+
+const FromOrToInfo = ({ i }: PropsType) => {
+  switch (i.Module) {
+    case Modules.account:
+      return (
+        <>
+          <h3>{i.Name}</h3>
+          <h3>({i.Module})</h3>
+          <h6>email: {i.Email}</h6>
+        </>
+      );
+    case Modules.wallet:
+      return (
+        <>
+          <h3>{i.Name}</h3>
+          <h3>({i.Module})</h3>
+        </>
+      );
+    default:
+      return <>unknown Module ("{i.Module}")</>;
+  }
+};
 
 export default function App() {
   const c = mockCommand;
 
   const f = c.data._xtra.From;
   const t = c.data._xtra.To;
+
+  const b: any = c.data._xtra.From;
+  const canEdit = c.myPermissions.indexOf("add") >= 0;
+  const canDelete = c.myPermissions.indexOf("delete") >= 0;
 
   return (
     <div className="App">
@@ -23,14 +54,11 @@ export default function App() {
         <div style={{ display: "flex" }}>
           <div style={{ marginRight: 50 }}>
             <h2>Bu hesaptan</h2>
-            <h3>{f.Name}</h3>
-            <h3>({f.Module})</h3>
-            <h6>email: {f.Email}</h6>
+            <FromOrToInfo i={f} />
           </div>
           <div>
             <h2>Bu hesaba</h2>
-            <h3>{t.Name}</h3>
-            <h3>({t.Module})</h3>
+            <FromOrToInfo i={t} />
           </div>
         </div>
       </div>
@@ -38,10 +66,12 @@ export default function App() {
       <h2>İşlem tutarı</h2>
       <div>
         balances:
-        {c.data._xtra.From.Balances.map((b) => (
+        {b.Balances?.map((b: any) => (
           <div>{`${b.CUCode}: ${b.Amount.toFixed(2)} ${b.Sign}`}</div>
         ))}
       </div>
+      {canEdit && <button>edit</button>}
+      {canDelete && <button>delete</button>}
       <h1>v-6</h1>
     </div>
   );
