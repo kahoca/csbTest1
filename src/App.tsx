@@ -10,6 +10,9 @@ export default function App() {
       <h2>Start editing to see some magic happen!</h2>
       <h3>Date: {c.data.header.date}</h3>
       <h3>Document no: {c.data.header.BelgeNo}</h3>
+      <h3>FromModule: {c.data.header.From.Module}</h3>
+      <h3>Account: {c.data._xtra._From.Name}</h3>
+      <h3>email: {c.data._xtra._From.Email}</h3>
     </div>
   );
 }

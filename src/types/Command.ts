@@ -51,6 +51,7 @@ const commandHeaderExtra = {
   },
   _From: {
     Name: "Müşteri - 1",
+    Email: "musteri@exampe.com",
     Phone: "12123123",
     Bolge: "Merkez",
     Balances: [
