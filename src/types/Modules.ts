@@ -1,10 +1,10 @@
 export enum Modules {
-  account = "account",
-  wallet = "wallet",
-  workshop = "workshop"
+  Account = "account",
+  Wallet = "wallet",
+  Workshop = "workshop"
 }
 type accountModule = {
-  Module: Modules.account;
+  Module: Modules.Account;
   Name: string;
   Email: string;
   Phone: string;
@@ -12,16 +12,16 @@ type accountModule = {
   Balances: any[];
 };
 type walletModule = {
-  Module: Modules.wallet;
+  Module: Modules.Wallet;
   Name: string;
 };
 type workshopModule = {
-  Module: Modules.workshop;
+  Module: Modules.Workshop;
   Name: string;
 };
 
 export const mockAccount: accountModule = {
-  Module: Modules.account,
+  Module: Modules.Account,
   Name: "Müşteri - 1",
   Email: "musteri@exampe.com",
   Phone: "12123123",
@@ -41,11 +41,11 @@ export const mockAccount: accountModule = {
 };
 
 export const mockWallet: walletModule = {
-  Module: Modules.wallet,
+  Module: Modules.Wallet,
   Name: "Merkez kasa"
 };
 export const mockWorkshop: workshopModule = {
-  Module: Modules.workshop,
+  Module: Modules.Workshop,
   Name: "18 Alyans"
 };
 

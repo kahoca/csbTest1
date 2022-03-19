@@ -8,7 +8,7 @@ type PropsType = {
 
 const FromOrToInfo = ({ i }: PropsType) => {
   switch (i.Module) {
-    case Modules.account:
+    case Modules.Account:
       return (
         <>
           <h3>{i.Name}</h3>
@@ -16,7 +16,7 @@ const FromOrToInfo = ({ i }: PropsType) => {
           <h6>email: {i.Email}</h6>
         </>
       );
-    case Modules.wallet:
+    case Modules.Wallet:
       return (
         <>
           <h3>{i.Name}</h3>
