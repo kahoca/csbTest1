@@ -1,4 +1,4 @@
-import { AnyModule, mockAccount, mockWorkshop } from "./Modules";
+import { AnyModule, mockAccount, mockWallet, Modules } from "./Modules";
 
 const commandHeader = {
   printed: true,
@@ -7,11 +7,11 @@ const commandHeader = {
   BelgeNo: "0001",
   total: 123,
   From: {
-    Module: "Account",
+    Module: Modules.Account,
     Id: 88
   },
   To: {
-    Module: "Wallet",
+    Module: Modules.Wallet,
     Id: 1
   },
   meta: {
@@ -54,7 +54,7 @@ type ExtraType = { From: AnyModule; To: AnyModule };
 
 const mockExtra: ExtraType = {
   From: mockAccount,
-  To: mockWorkshop
+  To: mockWallet
 };
 
 export const mockCommand = {

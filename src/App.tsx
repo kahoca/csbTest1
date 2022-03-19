@@ -66,8 +66,8 @@ export default function App() {
       <h2>İşlem tutarı</h2>
       <div>
         balances:
-        {b.Balances?.map((b: any) => (
-          <div>{`${b.CUCode}: ${b.Amount.toFixed(2)} ${b.Sign}`}</div>
+        {b.Balances?.map((b: any, i: number) => (
+          <div key={i}>{`${b.CUCode}: ${b.Amount.toFixed(2)} ${b.Sign}`}</div>
         ))}
       </div>
       {canEdit && <button>edit</button>}
