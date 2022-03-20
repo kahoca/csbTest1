@@ -5,45 +5,45 @@ import { mockCommand } from "./types/Command";
 import { AnyModule, mockBuilding, Modules } from "./types/Modules";
 
 type PropsType = {
-  i: AnyModule;
+  card: AnyModule;
 };
 
 
 
-const FromOrToInfo = ({ i }: PropsType) => {
-  switch (i.Module) {
+const AnyModuleInfo = ({ card }: PropsType) => {
+  switch (card.Module) {
     case Modules.Account:
       return (
         <>
-          <h3>{i.Name}</h3>
-          <h3>({i.Module})</h3>
-          <h6>email: {i.Email}</h6>
-          <Balances b={i.Balances} />
+          <h3>{card.Name}</h3>
+          <h3>({card.Module})</h3>
+          <h6>email: {card.Email}</h6>
+          <Balances b={card.Balances} />
         </>
       );
     case Modules.Wallet:
       return (
         <>
-          <h3>{i.Name}</h3>
-          <h3>({i.Module})</h3>
-          <Balances b={i.Balances} />
+          <h3>{card.Name}</h3>
+          <h3>({card.Module})</h3>
+          <Balances b={card.Balances} />
         </>
       );
     case Modules.Workshop:
       return <>
-        <h3>{i.Name}</h3>
-        <h3>({i.Module})</h3>
-        <h6>Milyem: {i.Mily}</h6>
-        <Balances b={i.Balances} />
+        <h3>{card.Name}</h3>
+        <h3>({card.Module})</h3>
+        <h6>Milyem: {card.Mily}</h6>
+        <Balances b={card.Balances} />
       </>
-        case Modules.Section:
-          return <>
-            <h3>{mockBuilding.Name}-{i.Name}</h3>
-            <h3>({i.Module})</h3>
-            <h6>Building: {i.BuildingId}</h6>
-          </>
+    case Modules.Section:
+      return <>
+        <h3>{mockBuilding.Name}-{card.Name}</h3>
+        <h3>({card.Module})</h3>
+        <h6>Building: {card.BuildingId}</h6>
+      </>
     default:
-      return <>unknown Module ("{i.Module}")</>;
+      return <>unknown Module ("{card.Module}")</>;
   }
 };
 
@@ -53,9 +53,10 @@ export default function App() {
   const f = c.data._xtra.From;
   const t = c.data._xtra.To;
 
-  const b: any = c.data._xtra.From;
-  const canEdit = c.myPermissions.indexOf("add") >= 0;
-  const canDelete = c.myPermissions.indexOf("delete") >= 0;
+  const ican = {
+    Edit: c.myPermissions.indexOf("add") >= 0,
+    Delete: c.myPermissions.indexOf("delete") >= 0
+  };
 
   return (
     <div className="App">
@@ -73,11 +74,11 @@ export default function App() {
         <div style={{ display: "flex" }}>
           <div style={{ marginRight: 50 }}>
             <h2>Bu hesaptan</h2>
-            <FromOrToInfo i={f} />
+            <AnyModuleInfo card={f} />
           </div>
           <div>
             <h2>Bu hesaba</h2>
-            <FromOrToInfo i={t} />
+            <AnyModuleInfo card={t} />
           </div>
         </div>
       </div>
@@ -86,8 +87,8 @@ export default function App() {
       <div>
         <Lines l={c.data.lines} />
       </div>
-      {canEdit && <button>edit</button>}
-      {canDelete && <button>delete</button>}
+      {ican.Edit && <button>edit</button>}
+      {ican.Delete && <button>delete</button>}
       <h1>v-6</h1>
     </div>
   );
