@@ -8,8 +8,6 @@ type PropsType = {
   i: AnyModule;
 };
 
-
-
 const FromOrToInfo = ({ i }: PropsType) => {
   switch (i.Module) {
     case Modules.Account:
@@ -30,18 +28,24 @@ const FromOrToInfo = ({ i }: PropsType) => {
         </>
       );
     case Modules.Workshop:
-      return <>
-        <h3>{i.Name}</h3>
-        <h3>({i.Module})</h3>
-        <h6>Milyem: {i.Mily}</h6>
-        <Balances b={i.Balances} />
-      </>
-        case Modules.Section:
-          return <>
-            <h3>{mockBuilding.Name}-{i.Name}</h3>
-            <h3>({i.Module})</h3>
-            <h6>Building: {i.BuildingId}</h6>
-          </>
+      return (
+        <>
+          <h3>{i.Name}</h3>
+          <h3>({i.Module})</h3>
+          <h6>Milyem: {i.Mily}</h6>
+          <Balances b={i.Balances} />
+        </>
+      );
+    case Modules.Section:
+      return (
+        <>
+          <h3>
+            {mockBuilding.Name}-{i.Name}
+          </h3>
+          <h3>({i.Module})</h3>
+          <h6>Building: {i.BuildingId}</h6>
+        </>
+      );
     default:
       return <>unknown Module ("{i.Module}")</>;
   }
@@ -53,7 +57,6 @@ export default function App() {
   const f = c.data._xtra.From;
   const t = c.data._xtra.To;
 
-  const b: any = c.data._xtra.From;
   const canEdit = c.myPermissions.indexOf("add") >= 0;
   const canDelete = c.myPermissions.indexOf("delete") >= 0;
 
@@ -88,7 +91,7 @@ export default function App() {
       </div>
       {canEdit && <button>edit</button>}
       {canDelete && <button>delete</button>}
-      <h1>v-6</h1>
+      <h1>v-7</h1>
     </div>
   );
 }
