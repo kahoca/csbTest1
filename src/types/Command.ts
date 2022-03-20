@@ -1,4 +1,4 @@
-import { AnyModule, mockAccount, mockWallet, Modules } from "./Modules";
+import { AnyModule, mockAccount1, mockAccount2, mockAccounts, mockSection, mockWallet, mockWorkshop, Modules } from "./Modules";
 
 const commandHeader = {
   printed: true,
@@ -23,7 +23,7 @@ const commandHeader = {
 const commandLine1 = {
   id: 1,
   Comments: "elden alınan",
-  CuCode: "22H",
+  CUCode: "22H",
   Amount: 12.58,
   Mily: 912,
   FromBF: 0,
@@ -38,7 +38,7 @@ const commandLine1 = {
 const commandLine2 = {
   id: 2,
   Comments: "",
-  CuCode: "USD",
+  CUCode: "USD",
   Amount: 100,
   Mily: 0,
   FromBF: 14.6897,
@@ -53,21 +53,25 @@ const commandLine2 = {
 type ExtraType = { From: AnyModule; To: AnyModule };
 
 const mockExtra: ExtraType = {
-  From: mockAccount,
+  From: mockAccounts.find((x, id = commandHeader.From.Id) => x.id === id) || mockAccount1,
   To: mockWallet
 };
 
+const data = {
+  header: commandHeader,
+  _xtra: mockExtra,
+  lines: [commandLine1, commandLine2]
+}
+
+const meta = {
+  lastEditedTime: "",
+  lastEditedUser: ""
+}
+
 export const mockCommand = {
+  meta,
   myPermissions: ["add", "edit", "delete", "seal"],
-  meta: {
-    lastEditedTime: "",
-    lastEditedUser: ""
-  },
   state: "",
   flags: 1 | 2 | 4 | 8 | 16,
-  data: {
-    header: commandHeader,
-    _xtra: mockExtra,
-    lines: [commandLine1, commandLine2]
-  }
+  data
 };

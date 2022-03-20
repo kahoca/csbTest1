@@ -1,10 +1,14 @@
+import Balances from "./Balances";
+import Lines from "./Lines";
 import "./styles.css";
 import { mockCommand } from "./types/Command";
-import { AnyModule, Modules } from "./types/Modules";
+import { AnyModule, mockBuilding, Modules } from "./types/Modules";
 
 type PropsType = {
   i: AnyModule;
 };
+
+
 
 const FromOrToInfo = ({ i }: PropsType) => {
   switch (i.Module) {
@@ -14,6 +18,7 @@ const FromOrToInfo = ({ i }: PropsType) => {
           <h3>{i.Name}</h3>
           <h3>({i.Module})</h3>
           <h6>email: {i.Email}</h6>
+          <Balances b={i.Balances} />
         </>
       );
     case Modules.Wallet:
@@ -21,8 +26,22 @@ const FromOrToInfo = ({ i }: PropsType) => {
         <>
           <h3>{i.Name}</h3>
           <h3>({i.Module})</h3>
+          <Balances b={i.Balances} />
         </>
       );
+    case Modules.Workshop:
+      return <>
+        <h3>{i.Name}</h3>
+        <h3>({i.Module})</h3>
+        <h6>Milyem: {i.Mily}</h6>
+        <Balances b={i.Balances} />
+      </>
+        case Modules.Section:
+          return <>
+            <h3>{mockBuilding.Name}-{i.Name}</h3>
+            <h3>({i.Module})</h3>
+            <h6>Building: {i.BuildingId}</h6>
+          </>
     default:
       return <>unknown Module ("{i.Module}")</>;
   }
@@ -65,10 +84,7 @@ export default function App() {
 
       <h2>İşlem tutarı</h2>
       <div>
-        balances:
-        {b.Balances?.map((b: any, i: number) => (
-          <div key={i}>{`${b.CUCode}: ${b.Amount.toFixed(2)} ${b.Sign}`}</div>
-        ))}
+        <Lines l={c.data.lines} />
       </div>
       {canEdit && <button>edit</button>}
       {canDelete && <button>delete</button>}
