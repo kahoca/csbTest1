@@ -89,7 +89,7 @@ export default function App() {
       </div>
       {ican.Edit && <button>edit</button>}
       {ican.Delete && <button>delete</button>}
-      <h1>v-6</h1>
+      <h1>v-7</h1>
     </div>
   );
 }
